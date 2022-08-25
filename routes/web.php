@@ -14,16 +14,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
+
+Route::post('follow/{user}', 'App\Http\Controllers\FollowsController@store');
+Route::get('/', 'App\Http\Controllers\PostsController@index');
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
+Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');
 
 
-Route::post('follow/{user}', 'FollowController@store');
 Route::get('/p/create', 'App\Http\Controllers\PostsController@create');
 Route::get('/p/{post}', 'App\Http\Controllers\PostsController@show');
 Route::post('/p', 'App\Http\Controllers\PostsController@store');
+
+
+Route::group(['prefix' => 'auth'], function() {
+
+	Route::get('login', 'Auth\AuthController@getLogin');
+	Route::post('login', 'Auth\AuthController@postLogin');
+	Route::get('logout', 'Auth\AuthController@getLogout');
+
+	Route::get('register', 'Auth\AuthController@getRegister');
+	Route::post('register', 'Auth\AuthController@postRegister');
+  });
+  Route::get('/{any?}', [
+    function () {
+        return view('welcome');
+    }
+])->where('any', '.*');

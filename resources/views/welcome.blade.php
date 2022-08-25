@@ -106,5 +106,16 @@
                 </div>
             </div>
         </div>
+
+
+        <div id="app">
+        </div>
+         <script>
+           window.Laravel = <?php echo json_encode([
+               'csrfToken' => csrf_token(),
+                    ]); ?>
+          </script>
+        <script src="{{ mix('js/app.js') }}" defer></script>
     </body>
+  
 </html>

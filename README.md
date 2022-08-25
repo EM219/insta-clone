@@ -73,4 +73,10 @@ php artisan ui:auth
 php artisan make:migration create_posts_table
 php artisan make:controller ProfilesController 
  php artisan make:migration create_profiles_table
- php artisan make:model Profile   -->
+ php artisan make:model Profile 
+ php artisan storage:link  
+ npm run watch
+ php artisan make:migration creates_profile_user_pivote_table --create profile_user
+ composer require laravel/telescope
+  php artisan telescope:install
+   php artisan migrate  -->
